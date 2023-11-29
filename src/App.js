@@ -1,27 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
 import Button from './component/button';
+import React from 'react';
+import Kakao from './taps/kakao'
+import Start from './taps/start'
+import Information from './taps/information'
+import Random from './taps/random'
+import Result from './taps/result'
+
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        
-        
-        <a
-          className="App-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-          <Button type='primary'size='small' title='home' />
-          <Button type='secondary'size='large' title='back' />
-          <Button type='primary'size='small' title='home' />
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+        <div className='App'>
+            <Routes>
+                <Route path='/' element={<Kakao />} />
+                <Route path='/start' element={<Start />} />
+                <Route path='/information' element={<Information />}/>
+                <Route path='/random' element={<Random />} />
+                <Route path='/result' element={<Result />} />  
+            
+            </Routes>
+        </div>
+    </BrowserRouter>
+    );
 }
-
 export default App;
