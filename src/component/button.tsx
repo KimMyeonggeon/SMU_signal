@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 type ButtonType = 'primary' | 'secondary' | 'destructive';
-type Size = 'short' | 'long';
+type Size = 'small' |'medium'| 'large';
 
 type ButtonProps = {
   onClick?: () => void;
@@ -13,6 +14,7 @@ type ButtonProps = {
 
 const ButtonContainer = styled.div<{
   type: 'primary' | 'secondary' | 'destructive';
+  size: 'small' |'medium'| 'large';
 }>`
   border-radius: 8px;
   justify-content: center;
@@ -21,57 +23,60 @@ const ButtonContainer = styled.div<{
   display: flex;
   background-color: ${(props) =>
     props.type === 'primary'
-      ? theme.color.primary[100]
+      ? '#FFC8C8'
       : props.type === 'secondary'
-      ? theme.color.primary[100]
+      ? '#CBD1D9'
       : '#FFF6F6'};
   color: ${(props) =>
     props.type === 'primary'
       ? 'white'
       : props.type === 'secondary'
-      ? theme.color.primary[100]
+      ? '##EEF1F3'
       : '#FF3E3E'};
   cursor: pointer;
+
+
+  ${(props) =>
+    props.size === 'large' &&
+    css`
+      height: 3rem;
+      font-size: 1.25rem;
+    `}
+  ${(props) =>
+    props.size === 'medium' &&
+    css`
+      height: 2.25rem;
+      font-size: 1rem;
+    `}
+    ${(props) =>
+    props.size === 'small' &&
+    css`
+      height: 1.75rem;
+      font-size: 0.875rem;
+    `}
   &:hover {
     background-color: ${(props) =>
       props.type === 'primary'
         ? '#1065ED'
         : props.type === 'secondary'
-        ? theme.color.primary[100]
+        ? '#FFB8B8'
         : '#FFDFDF'};
     color: ${(props) => props.type !== 'destructive' && 'white'};
   }
 `;
 
 const ButtonTitle = styled.p`
-    font-weight: 700;
-    font-size: 16px;
+  font-weight: 700;
+  font-size: 16px;
 `;
 
-const SIZES = {
-  sm: css`
-    --button-font-size: 0.875rem;
-    --button-padding: 8px 12px;
-    --button-radius: 4px;
-  `,
-  md: css`
-    --button-font-size: 1rem;
-    --button-padding: 12px 16px;
-    --button-radius: 8px;
-  `,
-  lg: css`
-    --button-font-size: 1.25rem;
-    --button-padding: 16px 20px;
-    --button-radius: 12px;
-  `,
-};
-
 export default function Button(props: ButtonProps) {
-  const { type = 'primary', title, onClick = () => {} } = props;
+  const { type = 'primary', size ='large', title, onClick = () => {} } = props;
   const [hover, setHover] = useState(false);
   return (
     <ButtonContainer
       type={type}
+      size={size}
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
