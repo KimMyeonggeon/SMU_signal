@@ -9,6 +9,6 @@ export default function kakao(){
             <div className={styles.title}>상명대에서 연인을 찾습니다</div>
             <Link to='/start'><button className={styles.kakao}><img className={styles.kakaoImage} src="./kakaotalk.png"/></button></Link>
         </div>
-       
+    
     );
 }
